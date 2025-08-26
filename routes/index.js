@@ -10,17 +10,20 @@ passport.use(new localStrategy(userModel.authenticate()))
 router.get('/', function(req, res, next) {
   res.render('index');
 });
+router.get('/a', function(req, res, next) {
+  res.render('profile');
+});
 router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
 const isLoggedIn = function(req,res,next){
   if(req.isAuthenticated()) return next();
-  res.redirect('/')
+  res.redirect('/login')
 }
  
 router.get('/profile',isLoggedIn, function(req, res, next) {
-  res.send('done');
+  res.render('feed');
 });
 
 router.post('/register', (req,res,next)=>{
@@ -36,17 +39,16 @@ router.post('/register', (req,res,next)=>{
 
 router.post('/login',passport.authenticate('local',{
   successRedirect: '/profile',
-  failureRedirect: '/'
+  failureRedirect: '/login'
 }),(req,res,next)=>{
 }) 
 
 
-router.post('/logout', function(req, res, next){
+router.get('/logout', function(req, res, next){
   req.logout(function(err) {
     if (err){ return next(err); }
-    res.redirect('/');
+    res.redirect('/login');
   });
 });
-
 
 module.exports = router; 
