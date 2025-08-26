@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const userModel=require('./users')
 const postModel=require('./posts')
-const localStrategy = require('passport-local');
+const localStrategy = require('passport-local').Strategy;
 const passport = require('passport');
 
 passport.use(new localStrategy(userModel.authenticate()))
@@ -14,37 +14,39 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
+const isLoggedIn = function(req,res,next){
+  if(req.isAuthenticated()) return next();
+  res.redirect('/')
+}
+ 
 router.get('/profile',isLoggedIn, function(req, res, next) {
   res.send('done');
 });
 
-router.post('/register',(req,res)=>{
-  const {username , email, fullname}= req.body
-  const userData = new userModel({ username, email, fullname })
-  userModel.register(userData , req.body.password)
+router.post('/register', (req,res,next)=>{
+  const {username, email, fullname } = req.body
+  const userdata = new userModel({username, email, fullname})
+  userModel.register(userdata, req.body.password)
   .then(function(){
-    passport.authenticate('local')(req,res, function(){
-      res.redirect('/profile')
+    passport.authenticate('local')(req,res,function(){
+      res.redirect('profile')
     })
   })
-})
+});
 
 router.post('/login',passport.authenticate('local',{
   successRedirect: '/profile',
   failureRedirect: '/'
-}) ,(req,res,next)=>{
+}),(req,res,next)=>{
 }) 
 
 
 router.post('/logout', function(req, res, next){
   req.logout(function(err) {
-    if (err) { return next(err); }
+    if (err){ return next(err); }
     res.redirect('/');
   });
 });
 
-function isLoggedIn(req,res,next){
-  if(req.isAuthenticated()) return next();
-  res.redirect('/')
-}
+
 module.exports = router; 

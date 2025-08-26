@@ -4,11 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const passport=require('passport')
-const expressSession = require('express-session')
+const session = require('express-session')
 const localStrategy = require('passport-local')
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var userModel = require('./routes/users');
 
 var app = express();
 
@@ -16,16 +16,17 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(expressSession({
-  resave:false,
-  saveUninitialized:false,
-  secret:"secret"
-}))
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: "secret"
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser(usersRouter.serializeUser());
-passport.deserializeUser(usersRouter.deserializeUser());
+passport.serializeUser(userModel.serializeUser());
+passport.deserializeUser(userModel.deserializeUser());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -34,7 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/users', userModel);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
