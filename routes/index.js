@@ -10,11 +10,11 @@ passport.use(new localStrategy(userModel.authenticate()))
 router.get('/', function(req, res, next) {
   res.render('index');
 });
-router.get('/a', function(req, res, next) {
+router.get('/a/:username', function(req, res) {
   res.render('profile');
 });
 router.get('/login', function(req, res, next) {
-  res.render('login');
+  res.render('login',{error:req.flash('error')});
 });
 
 const isLoggedIn = function(req,res,next){
@@ -22,8 +22,11 @@ const isLoggedIn = function(req,res,next){
   res.redirect('/login')
 }
  
-router.get('/profile',isLoggedIn, function(req, res, next) {
-  res.render('feed');
+router.get('/profile',isLoggedIn,async function(req, res, next) {
+  const user= await userModel.findOne({
+    username:req.session.passport.user
+  })
+  res.render('profile',{username:user});
 });
 
 router.post('/register', (req,res,next)=>{
@@ -39,9 +42,9 @@ router.post('/register', (req,res,next)=>{
 
 router.post('/login',passport.authenticate('local',{
   successRedirect: '/profile',
-  failureRedirect: '/login'
-}),(req,res,next)=>{
-}) 
+  failureRedirect: '/login',
+  failureFlash:true
+}),(req,res,next)=>{}) 
 
 
 router.get('/logout', function(req, res, next){

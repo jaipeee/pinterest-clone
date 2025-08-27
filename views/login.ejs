@@ -13,6 +13,9 @@
         <!--pinterest logo-->
         <img src="https://i.pinimg.com/originals/d3/d1/75/d3d175e560ae133f1ed5cd4ec173751a.png" alt="pin logo" class="img1" />
         <p class="header">Log in to see more</p>
+        <% if(error.length>0){%>
+        <p style="color: red;"><%=error%></p> 
+        <%}%>
         <form action="/login" method="post">
            <input name="username" type="text" placeholder="UserName" class="detail" /><br />
            <input name="password" type="password" placeholder="Password" class="detail" />
