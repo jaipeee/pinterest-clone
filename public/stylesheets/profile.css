@@ -1,0 +1,104 @@
+:root{--color-primary-50:239 246 255;--color-primary-100:219 234 254;--color-primary-200:191 219 254;--color-primary-300:147 197 253;--color-primary-400:96 165 250;--color-primary-500:59 130 246;--color-primary-600:37 99 235;--color-primary-700:29 78 216;--color-primary-800:30 64 175;--color-primary-900:30 58 138;--color-primary-950:23 37 84;--color-secondary-50:236 254 255;--color-secondary-100:207 250 254;--color-secondary-200:165 243 252;--color-secondary-300:103 232 249;--color-secondary-400:34 211 238;--color-secondary-500:6 182 212;--color-secondary-600:8 145 178;--color-secondary-700:14 116 144;--color-secondary-800:21 94 117;--color-secondary-900:22 78 99;--color-secondary-950:8 51 68}
+@font-face {
+    font-family: inter var;
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url(https://link-in-bio-theme.netlify.app/dist/font/Inter.var.woff2) format(woff2);
+}
+#page-bg {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1000%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='%230e2a47'%3e%3c/rect%3e%3cpath d='M0%2c474.395C88.438%2c479.309%2c162.313%2c416.014%2c239.92%2c373.323C323.44%2c327.38%2c438.054%2c304.563%2c471.206%2c215.192C504.56%2c125.277%2c435.993%2c31.306%2c399.72%2c-57.471C371.27%2c-127.102%2c322.193%2c-181.036%2c283.064%2c-245.276C234.304%2c-325.328%2c226.155%2c-441.534%2c141.401%2c-481.567C57.18%2c-521.348%2c-46.737%2c-483.317%2c-129.196%2c-440.003C-203.873%2c-400.777%2c-242.681%2c-321.54%2c-292.64%2c-253.574C-338.386%2c-191.34%2c-380.674%2c-130.57%2c-409.363%2c-58.858C-445.81%2c32.245%2c-523.012%2c130.98%2c-482.182%2c220.205C-441.345%2c309.444%2c-310.19%2c301.812%2c-223.375%2c347.578C-146.068%2c388.332%2c-87.256%2c469.546%2c0%2c474.395' fill='%230b2239'%3e%3c/path%3e%3cpath d='M1440 1001.812C1536.511 995.681 1638.9569999999999 1047.879 1724.243 1002.29 1810.722 956.063 1856.1779999999999 857.057 1885.721 763.554 1913.132 676.798 1894.21 586.566 1884.163 496.139 1873.7649999999999 402.55600000000004 1885.167 298.78 1825.946 225.57600000000002 1766.279 151.82 1659.364 147.39100000000002 1572.04 110.315 1471.14 67.47500000000002 1375.103-48.75999999999999 1272.852-9.251999999999953 1168.086 31.226999999999975 1188.854 194.17700000000002 1121.8 284.278 1062.222 364.33299999999997 946.8820000000001 392.094 906.312 483.267 860.664 585.85 844.545 708.6179999999999 886.661 812.701 929.2950000000001 918.066 1024.005 1003.182 1131.561 1039.941 1231.616 1074.136 1334.476 1008.5160000000001 1440 1001.812' fill='%23113255'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1000'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+    background-position: 50%;
+    background-size: cover;
+}
+
+.avatar-emoji {
+    bottom: 20;
+    right: 10;
+}
+
+.imgae {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 40%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0px 5px 50px 0px rgb(252, 68, 68), 0px 0px 0px 7px rgba(255, 74, 74, 0.5);
+}
+#section-cta-button-list a:hover {
+    box-shadow: 0 4px 8px rgba(255, 74, 74, 0.5), 0 6px 20px rgb(252, 68, 68);
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(213, 109, 109, 0.37);
+    color: white;
+    padding: 1px;
+    font-size: 17px;
+}
+.page-wrapper {
+  background-color: #000000;
+  color: white;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.avatar-wrapper {
+  background-color: #494848;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.avatar {
+  border-radius: 50%;
+  background-color: white;
+  padding: 4px;
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.avatar-emoji {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  font-size: 24px;
+}
+
+.resume-biography {
+   background-color: #494848;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.username {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+}
+
+.user-role {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #ccc;
+}
+
+.user-bio {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 500px;
+  margin: 0 auto;
+  color: #ddd;
+}
+.card{
+    margin-top: 20px;
+}
