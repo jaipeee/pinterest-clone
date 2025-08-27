@@ -28,27 +28,18 @@
 #section-cta-button-list a:hover {
     box-shadow: 0 4px 8px rgba(255, 74, 74, 0.5), 0 6px 20px rgb(252, 68, 68);
 }
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    background-color: rgba(213, 109, 109, 0.37);
-    color: white;
-    padding: 1px;
-    font-size: 17px;
-}
 .page-wrapper {
   background-color: #000000;
   color: white;
   min-height: 100vh;
   margin: 0;
-  padding: 0;
+  padding: 0px;
   font-family: Arial, sans-serif;
 }
 
 .avatar-wrapper {
-  background-color: #494848;
+  background-color: #b52828;
+  padding-top:20px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -74,7 +65,7 @@ footer {
 }
 
 .resume-biography {
-   background-color: #494848;
+   background-color: #b52828;
   text-align: center;
   padding: 2rem 1rem;
 }
@@ -101,4 +92,19 @@ footer {
 }
 .card{
     margin-top: 20px;
+    margin: 10px;
+}
+.logout-btn{
+    background-color: red;
+    padding: 5px;
+    margin-top: 10px;
+    width: 100px;
+    border: #b52828;
+    font-size: x-large;
+}
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: start;
 }

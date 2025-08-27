@@ -18,13 +18,25 @@
       Passionate about building modern web applications with MERN stack and exploring new technologies.  
       Experienced in backend, frontend, and database management.
     </p>
-  </section>
-  <div class="card" style="width: 18rem;">
-  <img src="https://www.stockvault.net/data/2017/02/08/222343/preview16.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
+ <input class="logout-btn" type="button" value="Logout" onclick="location.href='/logout'"> 
+ <form action="/upload" method="POST" enctype="multipart/form-data">
+     <input type="text" name="filecaption" placeholder="image caption">
+    <input type="file" name="file" >
+    <button type="submit">Upload</button>
+ </form>
+ </section>
+ 
+<div class="container">
+    <div class="cards">
+      <% username.posts.forEach(function(post){ %>
+          <div class="card" style="width: 18rem;">
+            <img src="/images/uploads/<%=post.image %> " class="card-img-top" alt="...">
+           <div class="card-body">
+             <h5 class="card-title"><%= post.imageText %></h5>
+            </div>
+            </div>
+     <% }) %>
+    </div>
 </div>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>

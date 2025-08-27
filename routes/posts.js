@@ -1,13 +1,15 @@
 const mongoose=require('mongoose')
 
 const postSchema=mongoose.Schema({
-    postText:{
+    imageText:{
         type:String,
         required:true
     },
     currentDate:{
         type:Date,
         default:Date.now
+    },image:{
+        type:String
     },
     user:{
         type:mongoose.Schema.Types.ObjectId,
