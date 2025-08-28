@@ -55,6 +55,7 @@
   width: 150px;
   height: 150px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  border: 3px solid #ccc;
 }
 
 .avatar-emoji {
@@ -107,4 +108,39 @@
     flex-wrap: wrap;
     gap: 20px;
     align-items: start;
+}
+
+.edit-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(100%, 70%); 
+  background: rgba(0, 0, 0, 0.155);
+  color: #fff;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+}
+.edit-icon:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.747);
+}
+.btn{
+    top: 20px; right: 10px;
+    background: black; 
+    color: white; 
+    border: none; 
+    border-radius: 20%; 
+    padding: 19px; 
+    cursor: pointer;
+}
+
+btn:hover{
+    background-color: #000000;
+    color: red;
+}
+.btn-div{
+    background-color: #b52828;
+   text-align: right;
 }

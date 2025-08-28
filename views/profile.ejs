@@ -8,9 +8,17 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body class="page-wrapper">
+  <%- include("nav-bar") %>
   <div class="avatar-wrapper">
-    <img src="https://imgs.search.brave.com/8N1K_Dhb7s-f6RgHo0but5opRnsMmnoIB6RyXAA5gLU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvNjY2/NTQ1MDYyL3ZlY3Rv/ci9kZWZhdWx0LXBs/YWNlaG9sZGVyLXBy/b2ZpbGUtaWNvbi5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/UDMyQm1LaTRCc0I0/Smhob0NhaFRYaHdC/QTBCNkhnSjNBcm9X/SHl1TThOOD0" alt="User Avatar" class="avatar">
-  </div>
+  <img src="/images/uploads/<%=username.dp%>" alt="User Avatar" class="avatar">
+
+  <form id="dpForm" action="/dp" method="post" enctype="multipart/form-data" style="display:none;">
+    <input type="file" name="pp" id="dpInput" accept="image/*">
+  </form>
+
+  <div class="edit-icon" onclick="document.getElementById('dpInput').click()">✎</div>
+</div>
+  
   <section class="resume-biography">
     <h1 class="username"><%= username.fullname %> </h1>
     <h5>@<%= username.username %> </h5>
@@ -20,24 +28,27 @@
     </p>
  <input class="logout-btn" type="button" value="Logout" onclick="location.href='/logout'"> 
  <form action="/upload" method="POST" enctype="multipart/form-data">
-     <input type="text" name="filecaption" placeholder="image caption">
-    <input type="file" name="file" >
+     <input type="text" name="filecaption" placeholder="image caption" required>
+    <input type="file" name="file" accept="image/*">
     <button type="submit">Upload</button>
  </form>
  </section>
  
 <div class="container">
-    <div class="cards">
-      <% username.posts.forEach(function(post){ %>
-          <div class="card" style="width: 18rem;">
-            <img src="/images/uploads/<%=post.image %> " class="card-img-top" alt="...">
-           <div class="card-body">
-             <h5 class="card-title"><%= post.imageText %></h5>
-            </div>
-            </div>
-     <% }) %>
-    </div>
+  <div class="cards">
+    <% username.posts.forEach(function(post){ %>
+      <div class="card" style="width: 18rem;">
+        <a href="/images/uploads/<%= post.image %>" download>
+          <img src="/images/uploads/<%= post.image %>" class="card-img-top" alt="Image">
+        </a>
+        <div class="card-body">
+          <h5 class="card-title"><%= post.imageText %></h5>
+        </div>
+      </div>
+    <% }) %>
+  </div>
 </div>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+ <script src="/javascripts/profile.js"></script>
 </body>
 </html>

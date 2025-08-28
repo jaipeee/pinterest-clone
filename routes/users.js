@@ -17,11 +17,11 @@ const userSchema = mongoose.Schema({
     }],
     dp:{
         type:String
+
     },
     email:{
         type:String,
-        unique:true,
-        required:true
+        unique:true
  
     },
     fullname:{

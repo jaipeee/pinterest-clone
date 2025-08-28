@@ -8,7 +8,8 @@ const postSchema=mongoose.Schema({
     currentDate:{
         type:Date,
         default:Date.now
-    },image:{
+    },
+    image:{
         type:String
     },
     user:{
