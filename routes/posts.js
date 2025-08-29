@@ -12,6 +12,7 @@ const postSchema=mongoose.Schema({
     image:{
         type:String
     },
+     cloudinary_id: { type: String },
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Users'

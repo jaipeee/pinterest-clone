@@ -1,12 +1,9 @@
 const mongoose = require('mongoose')
 const plm = require('passport-local-mongoose')
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.log(" MongoDB Error: ", err));
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(" MongoDB Error: ", err));
 
 const userSchema = mongoose.Schema({
     username:{

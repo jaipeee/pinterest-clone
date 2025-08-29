@@ -20,23 +20,20 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.get('/delete/:id',isLoggedIn, async (req,res,next)=>{
-  const post =await postModel.findByIdAndDelete(req.params.id);
+router.get('/delete/:id', isLoggedIn, async (req, res, next) => {
+  const post = await postModel.findByIdAndDelete(req.params.id);
   if (!post) return res.status(404).send("Post not found");
 
-    const user = await userModel.findOneAndUpdate({
-      username: req.session.passport.user },
-       { $pull: { posts: req.params.id }
-    })
-    const filePath = path.join("./public/images/uploads", post.image);
-    fs.unlink(filePath, (err) => {
-      if (err) console.log("File not found or already deleted:", err.message);
-    });
-    if (post.image) {
-      await cloudinary.uploader.destroy(post.image);
-    }
-    res.redirect('/profile')
-})
+  await userModel.findOneAndUpdate(
+    { username: req.session.passport.user },
+    { $pull: { posts: req.params.id } }
+  );
+
+  if (post.cloudinary_id) {
+    await cloudinary.uploader.destroy(post.cloudinary_id);
+  }
+  res.redirect('/profile');
+});
 
 router.get('/feed', isLoggedIn, async function(req, res, next) {
   const posts =await postModel.find().sort({currentDate:-1})
@@ -49,9 +46,10 @@ router.post('/upload',isLoggedIn, upload.single('file'), async function(req, res
   }
   const user = await userModel.findOne({username: req.session.passport.user})
   const post=await postModel.create({
-    image: req.file.filename,
+    image: req.file.path,
     imageText: req.body.filecaption,
-    user:user._id
+    user:user._id,
+    cloudinary_id: req.file.filename
   })
   user.posts.push(post._id)
   await user.save(post)
@@ -61,7 +59,7 @@ router.post('/upload',isLoggedIn, upload.single('file'), async function(req, res
 router.post('/dp', isLoggedIn, upload.single('pp'), async (req,res,next)=>{
   if(!req.file){return res.status(404).send('something went wrong')}
   const user = await userModel.findOne({username: req.session.passport.user})
-  user.dp=req.file.path
+  user.dp=req.file.path;
   await user.save()
   res.redirect("/profile")
 })
