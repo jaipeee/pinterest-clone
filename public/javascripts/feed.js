@@ -1,5 +1,4 @@
-
- const boxes = document.querySelectorAll('.box img');
+const boxes = document.querySelectorAll('.box img');
     const popup = document.getElementById('popup');
     const popupImg = document.getElementById('popupImg');
 
@@ -36,5 +35,25 @@ window.onclick = function (e) {
   if (e.target === modal) {
     modal.style.display = "none";
   }
-};
-	
+}
+
+document.querySelectorAll('.like-btn').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    const postId = this.dataset.id;
+    fetch('/likes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ postId })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        const countSpan = this.parentElement.querySelector('.like-count');
+        countSpan.textContent = data.likes;
+        this.classList.add('liked');
+      }
+    });
+  });
+});
+

@@ -17,29 +17,29 @@ nav {
   opacity: 0.9;
 }
 
+.logo, .img1, .navLink, .navLink li, .navLink a {
+  background-color: #000;
+}
+
 .logo {
   color: #49ffd0;
   letter-spacing: 25px;
   font-size: 20px;
-  background-color: #000;
 }
 
 .img1 {
   width: 100px;
   position: relative;
-  background-color: #000;
 }
 
 .navLink {
   display: flex;
   justify-content: space-around;
   width: 40%;
-  background-color: #000;
 }
 
 .navLink li {
   list-style: none;
-  background-color: #000;
 }
 
 .navLink a {
@@ -47,18 +47,13 @@ nav {
   text-decoration: none;
   letter-spacing: 2px;
   font-size: 16px;
-  background-color: #000;
 }
-
-.navLink a:hover {
-  color: #588275;
-}
+.navLink a:hover { color: #588275; }
 
 .lines {
   display: none;
   cursor: crosshair;
 }
-
 .lines div {
   width: 25px;
   height: 3px;
@@ -72,7 +67,6 @@ nav {
     right: 0;
     height: 20vh;
     top: 10vh;
-    background-color: #000;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,39 +75,14 @@ nav {
     transition: transform 0.3s ease-in;
     opacity: 0.9;
   }
-
-  .navLink li {
-    opacity: 1;
-  }
-
-  .lines {
-    display: block;
-  }
-
-  .nav-active {
-    transform: translateX(0%);
-  }
-
+  .navLink li { opacity: 1; }
+  .lines { display: block; }
+  .nav-active { transform: translateX(0%); }
   @keyframes navLinkFade {
-    from {
-      opacity: 0;
-      transform: translateX(50px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(50px);}
+    to { opacity: 1; transform: translateX(0);}
   }
-
-  .toggle .l1 {
-    transform: rotate(-45deg) translate(-5px, 6px);
-  }
-
-  .toggle .l2 {
-    opacity: 0;
-  }
-
-  .toggle .l3 {
-    transform: rotate(45deg) translate(-5px, -6px);
-  }
+  .toggle .l1 { transform: rotate(-45deg) translate(-5px, 6px);}
+  .toggle .l2 { opacity: 0;}
+  .toggle .l3 { transform: rotate(45deg) translate(-5px, -6px);}
 }

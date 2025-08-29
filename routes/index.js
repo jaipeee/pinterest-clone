@@ -5,6 +5,8 @@ const postModel=require('./posts')
 const localStrategy = require('passport-local').Strategy;
 const passport = require('passport');
 const upload = require('./multer')
+const fs = require("fs");
+const path = require("path");
 
 passport.use(new localStrategy(userModel.authenticate()))
 
@@ -17,11 +19,19 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.get('/delete',isLoggedIn, async (req,res,next)=>{
-    const user = await userModel.findOne({
-       username: req.session.passport.user
-    }).populate('posts')
-    res.send(user.posts)
+router.get('/delete/:id',isLoggedIn, async (req,res,next)=>{
+  const post =await postModel.findByIdAndDelete(req.params.id);
+  if (!post) return res.status(404).send("Post not found");
+
+    const user = await userModel.findOneAndUpdate({
+      username: req.session.passport.user },
+       { $pull: { posts: req.params.id }
+    })
+    const filePath = path.join("./public/images/uploads", post.image);
+    fs.unlink(filePath, (err) => {
+      if (err) console.log("File not found or already deleted:", err.message);
+    });
+    res.redirect('/profile')
 })
 
 router.get('/feed', isLoggedIn, async function(req, res, next) {
@@ -62,10 +72,39 @@ router.get('/profile',isLoggedIn,async function(req, res, next) {
   .populate('posts')
   res.render('profile',{username:user });
 });
+router.post('/update-bio', (req, res) => {
+  const { bio } = req.body;
+  userModel.findByIdAndUpdate(
+    req.user._id, 
+    { bio: bio },
+    { new: true }
+  )
+  .then(updatedUser => {
+    res.json({ success: true, bio: updatedUser.bio });
+  })
+  .catch(err => {
+    console.error(err);
+    res.json({ success: false });
+  });
+});
+
+router.post('/likes', isLoggedIn, async (req, res) => {
+  const postId = req.body.postId;
+  const userId = req.user._id;
+  const post = await postModel.findById(postId);
+  if (!post) return res.json({ success: false });
+
+  // Only add like if not already liked
+  if (!post.likes.includes(userId.toString())) {
+    post.likes.push(userId);
+    await post.save();
+  }
+  res.json({ success: true, likes: post.likes.length });
+})
 
 router.post('/register', (req,res,next)=>{
   const {username, email, fullname} = req.body
-  const userdata = new userModel({username, email, fullname })
+  const userdata = new userModel({username, email, fullname})
   userModel.register(userdata, req.body.password)
   .then(function(){
     passport.authenticate('local')(req,res,function(){
@@ -88,4 +127,4 @@ router.get('/logout', function(req, res, next){
   });
 });
 
-module.exports = router; 
+module.exports = router;

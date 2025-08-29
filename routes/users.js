@@ -14,7 +14,9 @@ const userSchema = mongoose.Schema({
     posts:[{
         type : mongoose.Schema.Types.ObjectId,
         ref:'Posts'
-    }],
+    }],bio:{
+        type:String
+    },
     dp:{
         type:String
 

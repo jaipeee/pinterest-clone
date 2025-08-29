@@ -25,20 +25,23 @@
              data-src="/images/uploads/<%= post.image %>">
         <div class="card-body">
           <h5 class="card-title"><%= post.imageText %></h5>
+          <div class="like-section">
+            <button class="like-btn" data-id="<%= post._id %>">
+              <span class="like-heart">&#10084;</span>
+            </button>
+            <span class="like-count" name="likes"><%= post.likes.length %></span>
+          </div>
         </div>
       </div>
     <% }) %>
   </div>
 </div>
-
-<!-- Modal -->
 <div id="imageModal" class="modal">
   <span class="close">&times;</span>
   <img class="modal-content" id="modalImg">
   <a id="downloadBtn" class="download-btn" download>Download</a>
 </div>
 
-  <!-- Popup for image preview -->
   <div class="popup" id="popup">
     <span class="close" onclick="closePopup()">&times;</span>
     <img id="popupImg" src="" alt="">

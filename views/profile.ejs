@@ -22,16 +22,32 @@
   <section class="resume-biography">
     <h1 class="username"><%= username.fullname %> </h1>
     <h5>@<%= username.username %> </h5>
-    <p class="user-bio">
-      Passionate about building modern web applications with MERN stack and exploring new technologies.  
-      Experienced in backend, frontend, and database management.
-    </p>
- <input class="logout-btn" type="button" value="Logout" onclick="location.href='/logout'"> 
- <form action="/upload" method="POST" enctype="multipart/form-data">
-     <input type="text" name="filecaption" placeholder="image caption" required>
-    <input type="file" name="file" accept="image/*">
-    <button type="submit">Upload</button>
- </form>
+  
+
+    <div class="container">
+  <p id="userBio"><%= username.bio %></p>
+
+  <button class="edit-btn" onclick="toggleBioEdit()">Edit Bio</button>
+
+  <div id="bioEditBox" class="bio-box" style="display: none;">
+    <textarea id="bioInput" class="bio-textarea" rows="4"></textarea>
+
+    <div style="margin-top: 10px;">
+      <button class="save-btn" onclick="saveBio()">Save</button>
+      <button class="cancel-btn" onclick="toggleBioEdit()">Cancel</button>
+    </div>
+  </div>
+</div>
+ <form action="/upload" method="POST" enctype="multipart/form-data" class="upload-container">
+    <label for="file-upload">
+      <div class="upload-icon">📷</div>
+    </label>
+    <input id="file-upload" type="file" name="file" accept="image/*" class="file-input" required>
+
+    <input type="text" name="filecaption" placeholder="Enter image caption..." class="caption-input" required>
+
+    <button type="submit" class="upload-btn">Upload Image</button>
+  </form>
  </section>
  
 <div class="container">
@@ -44,6 +60,8 @@
         <div class="card-body">
           <h5 class="card-title"><%= post.imageText %></h5>
         </div>
+        <a href="/delete/<%= post._id %>" onclick="return confirm('Delete this post?')">
+      <button>Delete</button>
       </div>
     <% }) %>
   </div>
