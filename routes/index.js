@@ -9,6 +9,7 @@ const fs = require("fs");
 const path = require("path");
 const cloudinary = require("cloudinary").v2;
 
+
 passport.use(new localStrategy(userModel.authenticate()))
 
 const isLoggedIn = function(req,res,next){
@@ -33,7 +34,7 @@ router.get('/delete/:id', isLoggedIn, async (req, res, next) => {
     await cloudinary.uploader.destroy(post.cloudinary_id);
   }
   res.redirect('/profile');
-});
+}); 
 
 router.get('/feed', isLoggedIn, async function(req, res, next) {
   const posts =await postModel.find().sort({currentDate:-1})

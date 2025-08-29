@@ -8,6 +8,7 @@ const passport=require('passport')
 const session = require('express-session')
 const localStrategy = require('passport-local')
 const flash =require('connect-flash')
+const fileupload = require('express-fileupload');
 
 var indexRouter = require('./routes/index');
 var userModel = require('./routes/users');
@@ -16,6 +17,10 @@ var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(fileupload({
+  useTempFiles:true
+}))
 
 app.use(flash());
 app.use(session({
