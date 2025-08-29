@@ -7,6 +7,7 @@ const passport = require('passport');
 const upload = require('./multer')
 const fs = require("fs");
 const path = require("path");
+const cloudinary = require("cloudinary").v2;
 
 passport.use(new localStrategy(userModel.authenticate()))
 
@@ -31,6 +32,9 @@ router.get('/delete/:id',isLoggedIn, async (req,res,next)=>{
     fs.unlink(filePath, (err) => {
       if (err) console.log("File not found or already deleted:", err.message);
     });
+    if (post.image) {
+      await cloudinary.uploader.destroy(post.image);
+    }
     res.redirect('/profile')
 })
 
@@ -57,7 +61,7 @@ router.post('/upload',isLoggedIn, upload.single('file'), async function(req, res
 router.post('/dp', isLoggedIn, upload.single('pp'), async (req,res,next)=>{
   if(!req.file){return res.status(404).send('something went wrong')}
   const user = await userModel.findOne({username: req.session.passport.user})
-  user.dp=req.file.filename
+  user.dp=req.file.path
   await user.save()
   res.redirect("/profile")
 })
@@ -70,7 +74,7 @@ router.get('/login', function(req, res, next) {
 router.get('/profile',isLoggedIn,async function(req, res, next) {
   const user= await userModel.findOne({ username:req.session.passport.user })
   .populate('posts')
-  res.render('profile',{username:user });
+  res.render('profile',{user:user });
 });
 router.post('/update-bio', (req, res) => {
   const { bio } = req.body;

@@ -10,7 +10,7 @@
 <body class="page-wrapper">
   <%- include("nav-bar") %>
   <div class="avatar-wrapper">
-  <img src="/images/uploads/<%=username.dp%>" alt="User Avatar" class="avatar">
+  <img src="<%=user.dp%>" alt="User Avatar" class="avatar">
 
   <form id="dpForm" action="/dp" method="post" enctype="multipart/form-data" style="display:none;">
     <input type="file" name="pp" id="dpInput" accept="image/*">
@@ -20,12 +20,12 @@
 </div>
   
   <section class="resume-biography">
-    <h1 class="username"><%= username.fullname %> </h1>
-    <h5>@<%= username.username %> </h5>
+    <h1 class="user"><%= user.fullname %> </h1>
+    <h5>@<%= user.username %> </h5>
   
 
     <div class="container">
-  <p id="userBio"><%= username.bio %></p>
+  <p id="userBio"><%= user.bio %></p>
 
   <button class="edit-btn" onclick="toggleBioEdit()">Edit Bio</button>
 
@@ -52,10 +52,10 @@
  
 <div class="container">
   <div class="cards">
-    <% username.posts.forEach(function(post){ %>
+    <% user.posts.forEach(function(post){ %>
       <div class="card" style="width: 18rem;">
-        <a href="/images/uploads/<%= post.image %>" download>
-          <img src="/images/uploads/<%= post.image %>" class="card-img-top" alt="Image">
+        <a href="<%= post.image %>" download>
+          <img src="<%= post.image %>" class="card-img-top" alt="Image">
         </a>
         <div class="card-body">
           <h5 class="card-title"><%= post.imageText %></h5>
