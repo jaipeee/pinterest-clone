@@ -1,7 +1,12 @@
 const mongoose = require('mongoose')
 const plm = require('passport-local-mongoose')
 
-mongoose.connect('mongodb://localhost:27017/pinterest_clone')
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log("MongoDB Connected"))
+.catch(err => console.log(" MongoDB Error: ", err));
 
 const userSchema = mongoose.Schema({
     username:{
